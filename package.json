@@ -1,15 +1,19 @@
 {
   "name": "example-pattern-of-react-redux",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example pattern of React Redux",
   "main": "index.js",
   "scripts": {
     "watch": "webpack-dev-server --open --mode development",
     "typecheck": "flow",
     "lint": "eslint src"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keik/example-pattern-of-react-redux.git"
+  },
+  "author": "keik <k4t0.kei@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "react": "^16.4.2",
