@@ -4,6 +4,7 @@
   "description": "Example pattern of React Redux",
   "main": "index.js",
   "scripts": {
+    "build:demo": "webpack --mode development && cp static/index.html dist && git add -f dist",
     "watch": "webpack-dev-server --open --mode development",
     "typecheck": "flow",
     "lint": "eslint src"
