@@ -63,6 +63,11 @@ class Users extends React.Component<
             ))}
           </tbody>
         </table>
+        <p>
+          Note: fetch users list data every time showing this page in spite of
+          creating cache in reducers, because of supposing we want fresh data
+          always.
+        </p>
       </section>
     );
   }
