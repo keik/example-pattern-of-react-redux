@@ -6,8 +6,7 @@
   "scripts": {
     "watch": "webpack-dev-server --open --mode development",
     "typecheck": "flow",
-    "lint": "eslint src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src"
   },
   "author": "",
   "license": "ISC",
