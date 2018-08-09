@@ -5,7 +5,11 @@
 * Based on [Ducks pattern](https://github.com/erikras/ducks-modular-redux)
 * Async process with ES `async/await` only, no middeware like redux-thunk, redux-promise, and redux-saga
 
-# To run demo
+# Demo
+
+https://keik.github.io/example-pattern-of-react-redux/dist
+
+# Run
 
 ```
 npm run watch
