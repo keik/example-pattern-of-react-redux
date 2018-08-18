@@ -18,5 +18,10 @@ module.exports = {
     "plugin:prettier/recommended",
     "prettier/flowtype",
     "prettier/react"
-  ]
+  ],
+  settings: {
+    react: {
+      version: "16.4"
+    }
+  }
 };
