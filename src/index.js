@@ -38,4 +38,5 @@ const routes = (
   </Provider>
 );
 
-ReactDOM.render(routes, (document.querySelector("#app"): any));
+const appEl = document.querySelector("#app");
+if (appEl != null) ReactDOM.render(routes, appEl);

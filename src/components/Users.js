@@ -2,15 +2,17 @@
 
 import * as React from "react";
 import { connect } from "react-redux";
+import type { RouterHistory } from "react-router";
 import type { Dispatch } from "redux";
 
+import type { ReducersStateT } from "../modules";
 import * as UsersAction from "../modules/users";
 import type { UserT } from "../types";
 
 class Users extends React.Component<
   {
     dispatch: Dispatch<*>,
-    history: *,
+    history: RouterHistory,
     users: Array<UserT>
   },
   {
@@ -73,4 +75,4 @@ class Users extends React.Component<
   }
 }
 
-export default connect(({ users }) => ({ users }))(Users);
+export default connect(({ users }: ReducersStateT) => ({ users }))(Users);

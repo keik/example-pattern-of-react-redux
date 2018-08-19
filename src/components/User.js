@@ -2,15 +2,17 @@
 
 import * as React from "react";
 import { connect } from "react-redux";
+import type { Match } from "react-router";
 import type { Dispatch } from "redux";
 
+import type { ReducersStateT } from "../modules";
 import * as UsersAction from "../modules/users";
 import type { UserWithDetailsT } from "../types";
 
 class User extends React.Component<
   {
     dispatch: Dispatch<*>,
-    match: *,
+    match: Match,
     user: ?UserWithDetailsT
   },
   {
@@ -83,6 +85,15 @@ class User extends React.Component<
   }
 }
 
-export default connect(({ users }, { match: { params: { userId } } }) => ({
-  user: users.find(user => user.id === Number(userId))
-}))(User);
+export default connect(
+  (
+    { users }: ReducersStateT,
+    {
+      match: {
+        params: { userId }
+      }
+    }: { match: Match }
+  ) => ({
+    user: users.find(user => user.id === Number(userId))
+  })
+)(User);

@@ -55,16 +55,12 @@ export async function load(
 ): Promise<StandardActionT<typeof LOAD, UserWithDetailsT>> {
   try {
     // Simulate remote access
-    const data = await new Promise(resolve =>
-      setTimeout(
-        () =>
-          resolve(
-            ((PSEUDO_DATABASE.users.find(
-              user => user.id === userId
-            ): any): UserWithDetailsT)
-          ),
-        1000
-      )
+    const data = await new Promise((resolve, reject) =>
+      setTimeout(() => {
+        const user = PSEUDO_DATABASE.users.find(user => user.id === userId);
+        if (user != null) resolve(user);
+        else reject();
+      }, 1000)
     );
     return {
       type: LOAD,
