@@ -95,7 +95,10 @@ export async function update(
     return {
       type: UPDATE,
       error: true,
-      payload: e
+      payload: e,
+      meta: {
+        locale: "user-update-error-messages"
+      }
     };
   }
 }

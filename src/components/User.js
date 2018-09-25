@@ -84,7 +84,7 @@ class User extends React.Component<Props, State> {
               Save with error
             </button>
           )}
-          <Errors />
+          <Errors id="user-update-error-messages" />
         </div>
         <$FormFields parentElement={this} />
         <p>

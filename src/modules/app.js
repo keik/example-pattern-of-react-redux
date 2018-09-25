@@ -15,6 +15,7 @@ export const closeError = (id: number) => ({
 export type State = {|
   errors: Array<{|
     id: number,
+    locale: ?string,
     message: string
   |}>
 |};
@@ -28,16 +29,23 @@ export default (
   action: StandardActionT<*, *>
 ): State => {
   if (action.error) {
+    const locale =
+      (action.meta != null &&
+        typeof action.meta.locale === "string" &&
+        action.meta.locale) ||
+      null;
     return {
       ...state,
       errors: [
         ...state.errors,
         {
           id: new Date().getTime(),
+          locale,
           message: action.payload.message
         }
       ]
     };
+    //    }
   }
 
   switch (action.type) {
