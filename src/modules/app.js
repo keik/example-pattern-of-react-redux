@@ -5,6 +5,13 @@
  * related application shareable data like `error`, as "Ducks" pattern.
  */
 
+const CLOSE_ERROR: "APP/CLOSE_ERROR" = "APP/CLOSE_ERROR";
+
+export const closeError = (id: number) => ({
+  type: CLOSE_ERROR,
+  payload: { id }
+});
+
 export type State = {|
   errors: Array<{|
     id: number,
@@ -32,5 +39,16 @@ export default (
       ]
     };
   }
-  return state;
+
+  switch (action.type) {
+    case CLOSE_ERROR: {
+      const { id } = action.payload;
+      return {
+        ...state,
+        errors: state.errors.filter(e => e.id !== id)
+      };
+    }
+    default:
+      return state;
+  }
 };

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import type { Match } from "react-router";
 import type { Dispatch } from "redux";
 
+import Errors from "../components/shared/Errors";
 import type { ReducersStateT } from "../modules";
 import * as UsersAction from "../modules/users";
 import type { UserWithDetailsT } from "../types";
@@ -83,6 +84,7 @@ class User extends React.Component<Props, State> {
               Save with error
             </button>
           )}
+          <Errors />
         </div>
         <$FormFields parentElement={this} />
         <p>
@@ -96,10 +98,12 @@ class User extends React.Component<Props, State> {
 
   async submitForm({ error }: { error?: true } = {}) {
     const { dispatch } = this.props;
-    dispatch(
-      await UsersAction.update(error ? -1 : this.state.form.id, this.state.form)
+    const action = await UsersAction.update(
+      error ? -1 : this.state.form.id,
+      this.state.form
     );
-    this.setState({ isEditing: false });
+    dispatch(action);
+    if (!action.error) this.setState({ isEditing: false });
   }
 
   updateForm(e: SyntheticInputEvent<HTMLInputElement>) {

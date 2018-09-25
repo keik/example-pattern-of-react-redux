@@ -34,7 +34,7 @@ export async function loadAll(): Promise<
               name: user.name
             }))
           ),
-        1000
+        500
       )
     );
     return {
@@ -60,7 +60,7 @@ export async function load(
         const user = PSEUDO_DATABASE.users.find(user => user.id === userId);
         if (user != null) resolve(user);
         else reject();
-      }, 1000)
+      }, 500)
     );
     return {
       type: LOAD,
@@ -85,7 +85,7 @@ export async function update(
         const user = PSEUDO_DATABASE.users.find(user => user.id === userId);
         if (user != null) resolve({ ...user, ...form });
         else reject(new Error("User not found"));
-      }, 1000)
+      }, 500)
     );
     return {
       type: UPDATE,
