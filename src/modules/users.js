@@ -34,7 +34,7 @@ export async function loadAll(): Promise<
               name: user.name
             }))
           ),
-        1000
+        500
       )
     );
     return {
@@ -60,7 +60,7 @@ export async function load(
         const user = PSEUDO_DATABASE.users.find(user => user.id === userId);
         if (user != null) resolve(user);
         else reject();
-      }, 1000)
+      }, 500)
     );
     return {
       type: LOAD,
@@ -71,6 +71,34 @@ export async function load(
       type: LOAD,
       error: true,
       payload: new Error("Fail to retrieve data of user details")
+    };
+  }
+}
+
+export async function update(
+  userId: number,
+  form: $Shape<UserWithDetailsT>
+): Promise<StandardActionT<typeof UPDATE, UserWithDetailsT>> {
+  try {
+    const data = await new Promise((resolve, reject) =>
+      setTimeout(() => {
+        const user = PSEUDO_DATABASE.users.find(user => user.id === userId);
+        if (user != null) resolve({ ...user, ...form });
+        else reject(new Error("User not found"));
+      }, 500)
+    );
+    return {
+      type: UPDATE,
+      payload: data
+    };
+  } catch (e) {
+    return {
+      type: UPDATE,
+      error: true,
+      payload: e,
+      meta: {
+        locale: "user-update-error-messages"
+      }
     };
   }
 }
@@ -112,6 +140,10 @@ export default (state: State = [], action: Action): State => {
             user => (user.id === userWithDetails.id ? userWithDetails : user)
           )
         : [...state, userWithDetails];
+    }
+    case UPDATE: {
+      const updatedUser = action.payload;
+      return state.map(user => (user.id === user.id ? updatedUser : user));
     }
     default:
       return state;
