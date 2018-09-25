@@ -75,6 +75,31 @@ export async function load(
   }
 }
 
+export async function update(
+  userId: number,
+  form: $Shape<UserWithDetailsT>
+): Promise<StandardActionT<typeof UPDATE, UserWithDetailsT>> {
+  try {
+    const data = await new Promise((resolve, reject) =>
+      setTimeout(() => {
+        const user = PSEUDO_DATABASE.users.find(user => user.id === userId);
+        if (user != null) resolve({ ...user, ...form });
+        else reject(new Error("User not found"));
+      }, 1000)
+    );
+    return {
+      type: UPDATE,
+      payload: data
+    };
+  } catch (e) {
+    return {
+      type: UPDATE,
+      error: true,
+      payload: e
+    };
+  }
+}
+
 // ****************
 // Reducer
 // ****************
@@ -112,6 +137,10 @@ export default (state: State = [], action: Action): State => {
             user => (user.id === userWithDetails.id ? userWithDetails : user)
           )
         : [...state, userWithDetails];
+    }
+    case UPDATE: {
+      const updatedUser = action.payload;
+      return state.map(user => (user.id === user.id ? updatedUser : user));
     }
     default:
       return state;
